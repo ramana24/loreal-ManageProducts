@@ -2,7 +2,9 @@
 	controllerName="ux.lorealproducts.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+	xmlns:semantic="sap.f.semantic"
+    xmlns:grid="sap.ui.table"
+    >
 
 	<semantic:SemanticPage
 		id="page"
@@ -26,6 +28,142 @@
 				unit="{CurrencyCode}"
 			/>
 		</semantic:headerContent>
+
+        <semantic:content>
+
+             <grid:Table class="sapUiSizeCondensed"
+				rows="{/ProductSet}"
+				selectionMode="MultiToggle"
+                alternateRowColors="true"
+				visibleRowCount="100"
+				paste="onPaste"
+				ariaLabelledBy="title">
+				<grid:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Products"/>
+					</OverflowToolbar>
+				</grid:extension>
+				<grid:columns>
+					<grid:Column width="11rem">
+						<Label text="Product Name" />
+						<grid:template>
+							<Text text="{ProductID}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+                    <grid:Column width="11rem">
+						<Label text="TypeCode" />
+						<grid:template>
+							<Text text="{TypeCode}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+                      <grid:Column width="11rem">
+						<Label text="Category" />
+						<grid:template>
+							<Text text="{Category}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+                     <grid:Column width="11rem">
+						<Label text="Name" />
+						<grid:template>
+							<Text text="{Name}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+				
+                 <grid:Column width="11rem">
+						<Label text="NameLanguage" />
+						<grid:template>
+							<Text text="{NameLanguage}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+                     <grid:Column width="11rem">
+						<Label text="Description" />
+						<grid:template>
+							<Text text="{Description}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="DescriptionLanguage" />
+						<grid:template>
+							<Text text="{DescriptionLanguage}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="SupplierID" />
+						<grid:template>
+							<Text text="{SupplierID}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="SupplierName" />
+						<grid:template>
+							<Text text="{SupplierName}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="TaxTarifCode" />
+						<grid:template>
+							<Text text="{TaxTarifCode}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="MeasureUnit" />
+						<grid:template>
+							<Text text="{MeasureUnit}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="WeightMeasure" />
+						<grid:template>
+							<Text text="{WeightMeasure}{WeightUnit}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="Price" />
+						<grid:template>
+							<Text text="{Price}{CurrencyCode}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="Dimensions" />
+						<grid:template>
+							<Text text="{Width}{DimUnit}*{Depth}{DimUnit}*{Height}{DimUnit}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="CreatedAt" />
+						<grid:template>
+							<Text text="{CreatedAt}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+ <grid:Column width="11rem">
+						<Label text="ChangedAt" />
+						<grid:template>
+							<Text text="{ChangedAt}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+
+
+
+
+				</grid:columns>
+			</grid:Table>
+
+        </semantic:content>
 
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
