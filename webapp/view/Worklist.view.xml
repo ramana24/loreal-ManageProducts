@@ -1,0 +1,149 @@
+<mvc:View
+	controllerName="ux.lorealproducts.controller.Worklist"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.f.semantic">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title
+				text="{i18n>worklistTitle}"
+				level="H2"/>
+		</semantic:titleHeading>
+
+		<semantic:content>
+			<Table
+				id="table"
+				width="auto"
+                showUnread="true"
+				items="{
+					path: '/ProductSet',
+					sorter: {
+						path: 'Category',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title
+							id="tableHeader"
+							text="{worklistView>/worklistTableTitle}"
+							level="H3"/>
+						<ToolbarSpacer />
+
+                        <ComboBox visible="false" width="auto" 
+                                            items="{
+                                    path: '/ProductSet',
+                                    sorter: { path: 'ProductID' }
+                                }">
+                            <core:Item key="{TypeCode}" text="{ProductID}" />
+                        </ComboBox>
+
+
+
+                        <!-- <Select></Select> -->
+
+                        <MultiComboBox  
+                                    maxWidth="400px"
+                                    valueState="{
+									path: 'WeightUnit',
+									formatter: '.formatter.StatusCheck'
+								}"
+                                    valueStateText="Success message. Extra long text used as a success message. Extra long text used as a success message - 2. Extra long text used as a success message."
+                                    items="{
+                                        path: '/ProductSet',
+                                        sorter: { path: 'ProductID' }
+                                    }">
+			                    	<core:Item key="{WeightUnit}" text="{ProductID}" />
+                        </MultiComboBox>
+						
+                        <Button text="ExportCSV" press="onExportCSV"></Button>
+
+                        <Button text="Spreadsheet" press="onExportSpreadsheet"></Button>
+                        <SearchField
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									maxWidth="200px"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+					</OverflowToolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn" mergeDuplicates="true">
+						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+					</Column>
+                    <Column   >
+						<Text text="Name" />
+					</Column>
+                    <Column   >
+						<Text text="SupplierID" />
+					</Column>
+
+                     <Column   >
+						<Text text="{i18n>SupplierName}" />
+					</Column>
+
+                    
+
+                     <Column   >
+						<Text text="Created Date" />
+					</Column>
+
+					<Column id="unitNumberColumn" hAlign="End">
+						<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem counter="12" highlight="Success" highlightText="Completed" navigated="false"
+						unread ="true" type="Navigation"
+						press=".onPress">
+						<cells>
+							<ObjectIdentifier
+								title="{Category}" />
+
+                                <Text text="{Name}" />
+
+
+                                <Text text="{SupplierID}"/> 
+                                
+                                <Text text="{SupplierName}"/> 
+                                
+                                <Text text="{CreatedAt}"/> 
+
+							    <ObjectNumber
+								number="{
+									path: 'Price',
+									formatter: '.formatter.numberUnit'
+								}"
+								unit="{CurrencyCode}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+
+	</semantic:SemanticPage>
+
+</mvc:View>
