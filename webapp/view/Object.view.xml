@@ -4,6 +4,8 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic"
     xmlns:grid="sap.ui.table"
+    xmlns:plugins="sap.ui.table.plugins"
+      xmlns:micro="sap.suite.ui.microchart"
     >
 
 	<semantic:SemanticPage
@@ -31,128 +33,204 @@
 
         <semantic:content>
 
-             <grid:Table class="sapUiSizeCondensed"
+
+<IconTabBar
+		id="idIconTabBarMulti"
+		expanded="{device>/isNoPhone}"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter icon="sap-icon://product" key="info">
+				
+ <grid:Table 
 				rows="{/ProductSet}"
-				selectionMode="MultiToggle"
+				selectionBehavior="Row"
                 alternateRowColors="true"
-				visibleRowCount="100"
+				visibleRowCount="50"
+                enableColumnReordering="true" 
+                enableCellFilter="true"
+                   fixedColumnCount="3"
+                   enableColumnFreeze="true"
 				paste="onPaste"
 				ariaLabelledBy="title">
+                <grid:plugins>
+					<plugins:MultiSelectionPlugin
+						limit="5"
+                        selectionMode="MultiToggle"
+          
+            
+						enableNotification="true"
+						showHeaderSelector="true"
+						selectionChange="onSelectionChange"/>
+				</grid:plugins>
+                <!-- <grid:rowActionTemplate>
+
+                <grid:RowAction>
+                 <grid:RowActionItem type="Navigation" press="onRowPress"></grid:RowActionItem>
+                    <grid:RowActionItem type="Delete" press="onDeletePress"></grid:RowActionItem>
+
+                </grid:RowAction>
+
+                
+                </grid:rowActionTemplate> -->
 				<grid:extension>
 					<OverflowToolbar style="Clear">
 						<Title id="title" text="Products"/>
 					</OverflowToolbar>
 				</grid:extension>
 				<grid:columns>
-					<grid:Column width="11rem">
+					<grid:Column width="11rem" 	sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="Product Name" />
 						<grid:template>
 							<Text text="{ProductID}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
-                    <grid:Column width="11rem">
+                    <grid:Column width="11rem" 	>
+						<Label text="%Percentage" />
+						<grid:template>
+								<!-- <micro:RadialMicroChart size="Responsive" height="18px" percentage="80%" valueColor="Good" press="OnChartpress" /> -->
+						<micro:RadialMicroChart size="Responsive" height="18px" fraction="{path:'Width', formatter : '.formatter.onFractionValue'}"  total="{path:'Depth', formatter : '.formatter.onFractionValue'}" valueColor="Good" press="OnChartpress" />
+                    	</grid:template>
+					</grid:Column>
+
+<grid:Column width="11rem" 	>
+						<Label text="%Percentage" />
+						<grid:template>
+								<!-- <micro:RadialMicroChart size="Responsive" height="18px" percentage="80%" valueColor="Good" press="OnChartpress" /> -->
+						<!-- <micro:RadialMicroChart size="Responsive" height="18px" fraction="{path:'Width', formatter : '.formatter.onFractionValue'}"  total="{path:'Depth', formatter : '.formatter.onFractionValue'}" valueColor="Good" press="OnChartpress" /> -->
+                    	<micro:ColumnMicroChart size="Responsive" height="18px" press="OnCloumnpress">
+						<micro:columns>
+							<micro:ColumnMicroChartData label="AMER" value="{path:'Width', formatter : '.formatter.onFractionValue'}" color="green"/>
+							<micro:ColumnMicroChartData label="APAC" value="{path:'Depth', formatter : '.formatter.onFractionValue'}" color="red"/>
+							<micro:ColumnMicroChartData label="EMEA" value="{path:'Height', formatter : '.formatter.onFractionValue'}" color="orange"/>
+						</micro:columns>
+					</micro:ColumnMicroChart>
+                        
+                        </grid:template>
+					</grid:Column>
+
+                    <!-- <ColumnMicroChart size="Responsive" height="18px" press="press">
+						<columns>
+							<ColumnMicroChartData label="AMER" value="{AMER}" color="sapUiChartPaletteQualitativeHue1"/>
+							<ColumnMicroChartData label="APAC" value="{APAC}" color="sapUiChartPaletteQualitativeHue2"/>
+							<ColumnMicroChartData label="EMEA" value="{EMEA}" color="sapUiChartPaletteQualitativeHue3"/>
+						</columns>
+					</ColumnMicroChart> -->
+
+                    <grid:Column width="11rem" sortProperty="TypeCode" filterProperty="TypeCode" >
 						<Label text="TypeCode" />
 						<grid:template>
 							<Text text="{TypeCode}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
-                      <grid:Column width="11rem">
+                      <grid:Column width="11rem" sortProperty="Category" filterProperty="Category" >
 						<Label text="Category" />
 						<grid:template>
 							<Text text="{Category}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
-                     <grid:Column width="11rem">
+                     <grid:Column width="11rem" sortProperty="Name" filterProperty="Name">
 						<Label text="Name" />
 						<grid:template>
 							<Text text="{Name}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 				
-                 <grid:Column width="11rem">
+                 <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="NameLanguage" />
 						<grid:template>
 							<Text text="{NameLanguage}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
-                     <grid:Column width="11rem">
+                     <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="Description" />
 						<grid:template>
 							<Text text="{Description}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="DescriptionLanguage" />
 						<grid:template>
 							<Text text="{DescriptionLanguage}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="SupplierID" />
 						<grid:template>
 							<Text text="{SupplierID}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="SupplierName" />
 						<grid:template>
 							<Text text="{SupplierName}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="TaxTarifCode" />
 						<grid:template>
 							<Text text="{TaxTarifCode}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="MeasureUnit" />
 						<grid:template>
 							<Text text="{MeasureUnit}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="WeightMeasure" />
 						<grid:template>
 							<Text text="{WeightMeasure}{WeightUnit}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="Price" />
 						<grid:template>
 							<Text text="{Price}{CurrencyCode}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="Dimensions" />
 						<grid:template>
 							<Text text="{Width}{DimUnit}*{Depth}{DimUnit}*{Height}{DimUnit}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="CreatedAt" />
 						<grid:template>
 							<Text text="{CreatedAt}" wrapping="false" />
 						</grid:template>
 					</grid:Column>
 
- <grid:Column width="11rem">
+ <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
 						<Label text="ChangedAt" />
 						<grid:template>
 							<Text text="{ChangedAt}" wrapping="false" />
+						</grid:template>
+					</grid:Column>
+
+                    <grid:Column width="11rem" sortProperty="ProductID" filterProperty="ProductID" >
+						<Label text="Action" />
+						<grid:template>
+                        <HBox>
+						<Button class="sapUiTinyMarginEnd" type="Reject" icon="sap-icon://delete" press="onDelete"></Button>
+                           	<Button class="sapUiTinyMarginEnd" type="Emphasized" icon="sap-icon://attachment" press="onUpdate"></Button>
+                        	<Button class="sapUiTinyMarginEnd" type="Transparent" icon="sap-icon://navigation-right-arrow" press="onRowNavigation"></Button>
+                         
+                                </HBox>
 						</grid:template>
 					</grid:Column>
 
@@ -163,6 +241,21 @@
 				</grid:columns>
 			</grid:Table>
 
+
+			</IconTabFilter>
+<IconTabSeparator icon="sap-icon://open-command-field"></IconTabSeparator>
+            <IconTabFilter icon="sap-icon://order-status" key="status">
+            </IconTabFilter>
+
+<IconTabSeparator icon="sap-icon://open-command-field"></IconTabSeparator>
+            
+            <IconTabFilter text="Analytics" icon="sap-icon://business-objects-experience" key="status">
+            </IconTabFilter>
+			
+		</items>
+	</IconTabBar>
+
+            
         </semantic:content>
 
 		<semantic:sendEmailAction>

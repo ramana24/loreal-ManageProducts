@@ -79,7 +79,17 @@ sap.ui.define([
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
-		},
+        },
+         onFractionValue:function(oValue){
+                if(oValue){
+
+                    return parseFloat(oValue);
+                }else {
+
+                    return oValue;
+                }
+        },
+        
 
 		/**
 		 * Binds the view to the object path.
@@ -133,7 +143,13 @@ sap.ui.define([
 			oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 			oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
-		}
+        },
+        onSelectionChange:function(oEvent){
+	        var oPlugin = oEvent.getSource();
+			var bLimitReached = oEvent.getParameters().limitReached;
+			var iIndices = oPlugin.getSelectedIndices();
+
+        }
 
 	});
 

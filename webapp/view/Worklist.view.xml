@@ -111,7 +111,7 @@
 				</columns>
 
 				<items>
-					<ColumnListItem counter="12" highlight="Success" highlightText="Completed" navigated="false"
+					<ColumnListItem counter="12" highlight="Success" highlightText="Completed" 
 						unread ="true" type="Navigation"
 						press=".onPress">
 						<cells>

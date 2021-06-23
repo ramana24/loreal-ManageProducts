@@ -15,6 +15,16 @@ sap.ui.define([], function () {
 			}
 			return parseFloat(sValue).toFixed(2);
         },
+
+        onFractionValue:function(oValue){
+                if(oValue){
+
+                    return parseFloat(oValue);
+                }else {
+
+                    return oValue;
+                }
+        },
         
         StatusCheck:function(ovalue){
             if(ovalue !== null){
